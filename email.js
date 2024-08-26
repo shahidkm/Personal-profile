@@ -1,13 +1,14 @@
-function sendMail(){
-    let parms ={
-    
-    name : document.getElementById ("name"). value,
-    
-    email : document.getElementById ("email") .value,
-    
-    subject : document-getElementById ("subjec"). value,
-    
-    message : document-getElementById ("message"). value,
-}
-emailjs.send("service_cqn96g6","template_sxktthi",parms).then(alert("Email send"))
-}
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        emailjs.sendForm('service_cqn96g6', 'template_sxktthi', this)
+            .then(function(response) {
+                document.getElementById('form-status').innerHTML = 'Message sent successfully!';
+                document.getElementById('contact-form').reset();
+            }, function(error) {
+                document.getElementById('form-status').innerHTML = 'Failed to send message.';
+                console.log('Failed to send message:', error);
+            });
+    });
+});
